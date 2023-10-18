@@ -3,13 +3,21 @@ import { useState } from "react";
 export function useTodo(initialItems?: string[]) {
   const [todos, setTodos] = useState<string[]>(initialItems || []);
 
-  /* Add your todo methods here */
-  const addItem = () => {
-    setTodos((prevTodos) => [...prevTodos, "New todo"]);
+  const addItem = (title: string) => {
+    setTodos((prevTodos) => [...prevTodos, title]);
+  };
+
+  const removeItem = (index: number) => {
+    setTodos((prevTodos) => {
+      const updatedTodos = [...prevTodos];
+      updatedTodos.splice(index, 1);
+      return updatedTodos;
+    });
   };
 
   return {
     todos,
     addTodo: addItem,
+    removeTodo: removeItem,
   };
 }
